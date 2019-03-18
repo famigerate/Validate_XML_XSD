@@ -25,14 +25,14 @@ class Validation:
             doc = etree.parse(self.xml_path, parser)
         # check for file IO error
         except IOError:
-            return 'Не удалось прочитать файл'
+            return 'Could not read file'
 
         # check for XML syntax errors
         except etree.XMLSyntaxError as err:
             with open('error_syntax.log', 'w') as error_log_file:
                 error_log_file.write(str(err.error_log))
         except:
-            return 'Не удалось прочитать файл'
+            return 'Could not read file'
 
         # validate against schema
         try:
@@ -42,12 +42,9 @@ class Validation:
             count = 0
             jsonarr = []
             for error in xmlschema.error_log:
-                text = 'Имя файла: {} Ошибка: {} Номер строки: {}'.format(os.path.basename(self.xml_path),
+                text = 'Filename: {} Error: {} Nubmer line : {}'.format(os.path.basename(self.xml_path),
                                                                               error.message,
                                                                               error.line)
-                text = text.replace("This element is not expected", "Неверное расположение поля в структуре")
-                text = text.replace("Expected is", "Ожидаемое поле - ")
-                text = text.replace("Element", "Элемент")
                 count += 1
                 jsonObj = [
                     {'count': count, 'text': text, 'line': error.line, 'filename': os.path.basename(self.xml_path)}
@@ -56,4 +53,4 @@ class Validation:
                 jsonarr.append(res)
             return jsonarr
         except:
-            return 'Не удалось прочитать файл...'
+            return 'Could not read file'
