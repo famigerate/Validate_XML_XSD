@@ -27,7 +27,7 @@ $ pip install -r requirements.txt
 ```
 2. Run the web-service 
 ```bash 
-$ python3 "path to app_eng.py" 
+$ python3 "path to app.py" 
 ```
 On next url will starting web-service
 ```
