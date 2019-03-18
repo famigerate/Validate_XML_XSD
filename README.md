@@ -19,7 +19,7 @@ http://127.0.0.1:5000/validate
 4. Пример тела ответа
 ```"count": 1,"filename": "some_file.XML","line": 4,"text": "filename: some_file.XML Error: Element \'DATE\': Incorrect field layout in structure. Expected field -  ( NAME ).Number line: 4"```
 
-## Инструкция ENG
+## Inctruction ENG
 
 1. Install dependencies
 ```bash 
