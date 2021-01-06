@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Material xmlns="http://foxtel.tv/engineering/broadcast/schemas/3/0/mediaExchange" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Details>
+		<Supplier supplierID="SIL" supplierName="SILVERTRAK"/>
+		<DateOfDelivery>2020-11-07T00:00:00</DateOfDelivery>
+		<DeliveryVersion>1</DeliveryVersion>
+		<OrderReference>9052450</OrderReference>
+		<AdditionalSupplierDetail/>
+	</Details>
+	<Title titleID="9742597">
+		<ProgrammeTitle>Underwater</ProgrammeTitle>
+		<YearOfProduction>2020</YearOfProduction>
+		<Distributor distributorID="" distributorName="20th Century Fox"/>
+		<ProgrammeMaterial materialID="MD143188">
+			<AdultMaterial>false</AdultMaterial>
+			<Format>UHD-SDR</Format>
+			<AspectRatio>16F16</AspectRatio>
+			<FirstFrameTimecode>00:00:00:00</FirstFrameTimecode>
+			<LastFrameTimecode>01:31:02:49</LastFrameTimecode>
+			<Duration>01:31:03:00</Duration>
+			<Media filename="TX169251_UNDERWATER.mxf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="fileMediaType">
+				<Format>MXF_OP1a_XAVC_UHD_SDR_300</Format>
+			</Media>
+			<AudioTracks>
+				<Track>
+					<TrackNumber>7</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>SURROUND_LEFT</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>6</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>LFE</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>8</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>SURROUND_RIGHT</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>3</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>FRONT_LEFT</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>5</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>CENTER</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>1</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>STEREO_LEFT</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>4</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>FRONT_RIGHT</TrackName>
+				</Track>
+				<Track>
+					<TrackNumber>2</TrackNumber>
+					<TrackEncoding>PCM</TrackEncoding>
+					<TrackName>STEREO_RIGHT</TrackName>
+				</Track>
+			</AudioTracks>
+			<Caption filename="">false</Caption>
+			<Presentation>
+				<Package presentationID="TX169251">
+					<Segmentation>
+						<Segment>
+							<SegmentTitle>Segment 1</SegmentTitle>
+							<SegmentNumber>1</SegmentNumber>
+							<SOM>00:00:00:00</SOM>
+							<EOM>01:31:02:49</EOM>
+						</Segment>
+					</Segmentation>
+				</Package>
+			</Presentation>
+			<AdditionalProgrammeDetail/>
+		</ProgrammeMaterial>
+		<AdditionalTitleDetail/>
+	</Title>
+</Material>

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by FOXTEL PTY LTD (FOXTEL PTY LTD) -->
+<xs:schema xmlns="http://foxtel.com.au/schemas/MaterialOrder/3/0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:altova="http://www.altova.com/xml-schema-extensions" targetNamespace="http://foxtel.com.au/schemas/MaterialOrder/3/0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xs:element name="Order">
+		<xs:annotation>
+			<xs:documentation>The definition for an ordering message - the root element.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Client" type="CompanyType">
+					<xs:annotation>
+						<xs:documentation>Company who place an order for a content</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DistributionList">
+					<xs:complexType>
+						<xs:choice maxOccurs="unbounded">
+							<xs:element name="Aggregator" type="CompanyType"/>
+							<xs:element name="Distributor">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Contact" type="CompanyType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SpecialRequests" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Special instruction or notes to aggregator or distributor about the particulat content or whole ordering. For eg , the reason for reordering or cancelling</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Materials">
+					<xs:annotation>
+						<xs:documentation>Details of the content</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="Material">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DeliveryVersion" type="xs:integer">
+											<xs:annotation>
+												<xs:documentation>Version of a companion xml sent by aggregator.For fresh order it is always 1</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Resolution" type="ResolutionEnum">
+											<xs:annotation>
+												<xs:documentation>Specifies the output format. For example, SD or HD.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AspectRatio" type="AspectRatioEnum">
+											<xs:annotation>
+												<xs:documentation>Specifies the aspect ratio.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AudioType" type="AudioTypeEnum"/>
+										<xs:element name="RequiredByDate" type="xs:date">
+											<xs:annotation>
+												<xs:documentation>Date when client expect the content</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AdultOnlyContent" type="xs:boolean">
+											<xs:annotation>
+												<xs:documentation>true/false flag to specify if the content is adult</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Filename" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Filename to be received by foxtel for the content</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Channel" type="ChannelType">
+											<xs:annotation>
+												<xs:documentation>Channel who owns the content</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="StartDate" type="xs:date">
+											<xs:annotation>
+												<xs:documentation>Start date of the content</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:choice>
+											<xs:element name="Program">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="ProgramType">
+															<xs:sequence>
+																<xs:element name="MaterialID" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>A text used to uniquely identify the media associated with the TX Package</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="PresentationID" type="presentationIdType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>A text used to uniquely identify the Transmission Package</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="ShortForm">
+												<xs:complexType>
+													<xs:choice>
+														<xs:element name="Trailer">
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="trailerType">
+																		<xs:sequence>
+																			<xs:element name="PromotedItem" type="ProgramType"/>
+																		</xs:sequence>
+																	</xs:extension>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Clip">
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="clipType"/>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+													</xs:choice>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+										<xs:element name="SlotLength" type="xs:nonNegativeInteger" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Duration of the content in milliseconds</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Instructions" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Instruction to aggregator/Distributor to perform certain task on the content  like Order Associated Content, QC Full</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Instruction" type="InstructionType" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Comments" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Any additional nformation about material</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="orderReference" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<altova:exampleValues>
+							<altova:example value="ORDER-3456"/>
+						</altova:exampleValues>
+					</xs:appinfo>
+					<xs:documentation>A string used to uniquely identify each order. Values must be unique.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="action" type="ActionTypeEnum" use="required">
+				<xs:annotation>
+					<xs:documentation>An enum type to specify if the order is a fresh order, reorder or cancel.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="date" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Order Date Time</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Receiver" type="ReceiverTypeEnum"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="EndpointType">
+		<xs:sequence>
+			<xs:element name="Extension" type="xs:anyType">
+				<xs:annotation>
+					<xs:documentation> API</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required">
+			<xs:annotation>
+				<xs:documentation>uri path</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="priority" type="EndpointPriorityEnum" use="required">
+			<xs:annotation>
+				<xs:documentation>priority of the end point</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="ContactName" type="xs:string"/>
+			<xs:element name="PhoneNumber" type="xs:string"/>
+			<xs:element name="EmailAddress" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompanyType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Name of a company</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tag" type="xs:string"/>
+			<xs:element name="Address" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Company Address</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UnitNumber" type="xs:string" minOccurs="0"/>
+						<xs:element name="StreetNumber" type="xs:string"/>
+						<xs:element name="Street" type="xs:string"/>
+						<xs:element name="Suburb" type="xs:string"/>
+						<xs:element name="Postcode" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Contacts">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Primary">
+							<xs:annotation>
+								<xs:documentation>First point of contact. Primary contact's detail will appear on Ordering Form, Eg person who creates an Order or first person who needs to act on order</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Contact" type="ContactType" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Secondary" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Secondary Contact</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Contact" type="ContactType" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Endpoints" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="Endpoint" type="EndpointType">
+							<xs:annotation>
+								<xs:documentation>Defines where data are meant to be. Can be webservice, ftp path</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EntityEnumType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DISTRIBUTOR"/>
+			<xs:enumeration value="AGGREGATOR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EndpointPriorityEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRIMARY"/>
+			<xs:enumeration value="SECONDARY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ActionTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="REORDER"/>
+			<xs:enumeration value="REDELIVERY"/>
+			<xs:enumeration value="CANCEL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReceiverTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AGGREGATOR"/>
+			<xs:enumeration value="DISTRIBUTOR"/>
+			<xs:enumeration value="ALL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AspectRatioEnum">
+		<xs:annotation>
+			<xs:documentation>This type defines a fixed list of string values for describing the aspect ratio of content. For example, 16F16 for 16:9 full frame.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="16F16">
+				<xs:annotation>
+					<xs:documentation>16:9 Full Frame</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12P16">
+				<xs:annotation>
+					<xs:documentation>16:9 Pillar Boxed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12R16">
+				<xs:annotation>
+					<xs:documentation>16:9 resized. Used to correct letterboxed content without causing a postage stamp effect.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16L12">
+				<xs:annotation>
+					<xs:documentation>16:9 material displayed in 4:3 aspect ratio (4:3 Letterboxed)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16C12">
+				<xs:annotation>
+					<xs:documentation>16:9 material displayed in 4:3 aspect ratio (4:3 Centrecut)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AudioTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STEREO"/>
+			<xs:enumeration value="STEREO_51SURROUND"/>
+			<xs:enumeration value="UNMIXED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResolutionEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SD"/>
+			<xs:enumeration value="HD"/>
+			<xs:enumeration value="3D"/>
+			<xs:enumeration value="UHD-SDR">
+				<xs:annotation>
+					<xs:documentation>UHD-SDR</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UHD-HDR10">
+				<xs:annotation>
+					<xs:documentation>UHD-HDR10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UHD-HLG">
+				<xs:annotation>
+					<xs:documentation>UHD-HLG</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UHD-DolbyVision">
+				<xs:annotation>
+					<xs:documentation>UHD-DolbyVision</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InstructionEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ORDMAT">
+				<xs:annotation>
+					<xs:documentation>Order Material</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEGM"/>
+			<xs:enumeration value="BREK"/>
+			<xs:enumeration value="CONF"/>
+			<xs:enumeration value="CAPT"/>
+			<xs:enumeration value="TXCAPT"/>
+			<xs:enumeration value="QC_SPOT"/>
+			<xs:enumeration value="QC_FULL"/>
+			<xs:enumeration value="ORDTRL"/>
+			<xs:enumeration value="TXTLS"/>
+			<xs:enumeration value="SSC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QualityCheckEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SPOT_CHECK"/>
+			<xs:enumeration value="FULL_REVIEW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ChannelType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>name of channel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contact" type="ContactType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>contact details for a channel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="tag" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique identifier for a channel</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="yearType">
+		<xs:annotation>
+			<xs:appinfo>
+				<altova:exampleValues>
+					<altova:example value="2012"/>
+				</altova:exampleValues>
+			</xs:appinfo>
+			<xs:documentation>Defines the format for specifying a year date.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:pattern value="\d\d\d\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InstructionType">
+		<xs:sequence>
+			<xs:element name="Code" type="InstructionEnum"/>
+			<xs:element name="Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Instructions can be multiple each seperated by comma </xs:documentation>
+					<xs:appinfo>
+						<altova:exampleValues>
+							<altova:example value="Segmentation"/>
+							<altova:example value="Break Before Credits"/>
+							<altova:example value="Specified Conform Task"/>
+							<altova:example value="Provide Caption File"/>
+							<altova:example value="QC Full"/>
+							<altova:example value="Order Trailer"/>
+							<altova:example value="Order Textless"/>
+							<altova:example value="Specified Secondary Content"/>
+							<altova:example value="Provide TX Caption File"/>
+						</altova:exampleValues>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Receiver" type="ReceiverTypeEnum"/>
+			<xs:element name="Keys" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Key value pair associated to the Instruction code like for off style guide segmentation, code can be "ASEG" and key value pair can be name="Noofparts" with value 4</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Key" type="keyType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="keyType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ProgramType">
+		<xs:sequence>
+			<xs:element name="TitleID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>A string used to uniquely identify each title in the MAM. Values must be unique and must be prefixed with a FOXTEL assigned string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProgrammeTitle" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Title of the programme.  Series name or non episodic programme title.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProductionNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Programme Production Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="YearOfProduction" type="yearType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Year when programme was produced.The format for this field will be YYYY (4 digits always).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EpisodeTitle" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Title of the Episode</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SeriesID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Season Number of the Program</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EpisodeID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Episode number of the current season</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="presentationIdType">
+		<xs:annotation>
+			<xs:documentation>A string type used for automation identifiers.</xs:documentation>
+			<xs:appinfo>
+				<altova:exampleValues>
+					<altova:example value="ABC12345"/>
+				</altova:exampleValues>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="clipType">
+		<xs:complexContent>
+			<xs:extension base="shortForm">
+				<xs:attribute name="id" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Identifier of a clip title</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="trailerType">
+		<xs:complexContent>
+			<xs:extension base="shortForm">
+				<xs:attribute name="id" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifier of a trailer title</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="shortForm" abstract="true">
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>short form title</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="presentationId" type="presentationIdType" use="required">
+			<xs:annotation>
+				<xs:documentation>uniquely identify the Transmission Package of a short form material</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>
